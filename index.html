@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Hidden Foundation | RushXR</title>
+    <style>
+        /* TRIONN LUXURY AGENCY AESTHETIC */
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap');
+
+        :root {
+            --bg-dark: #0A0A0A;
+            --bg-card: #141414;
+            --text-light: #F4EBE1; /* Warm, premium off-white */
+            --text-dim: #A39E98;
+            --accent: #C96F4D; /* Elegant terracotta */
+            
+            --font-serif: 'Playfair Display', serif;
+            --font-sans: 'Plus Jakarta Sans', sans-serif;
+            
+            --radius-large: 2vw;
+            --radius-button: 100px;
+            
+            --transition-smooth: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            cursor: none; /* Hide default cursor for custom dot */
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            overflow-x: hidden;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* CUSTOM TRIONN-STYLE CURSOR */
+        .cursor-dot {
+            width: 8px;
+            height: 8px;
+            background-color: var(--text-light);
+            border-radius: 50%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            transition: width 0.3s, height 0.3s, background-color 0.3s;
+        }
+        
+        .cursor-outline {
+            width: 40px;
+            height: 40px;
+            border: 1px solid rgba(244, 235, 225, 0.3);
+            border-radius: 50%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 9998;
+            transform: translate(-50%, -50%);
+            transition: 0.15s ease-out;
+        }
+
+        /* TYPOGRAPHY */
+        h1, h2, h3, .serif {
+            font-family: var(--font-serif);
+            font-weight: 400;
+        }
+
+        .heading-huge {
+            font-size: clamp(4rem, 10vw, 12rem);
+            line-height: 1;
+            letter-spacing: -0.02em;
+        }
+
+        .heading-large {
+            font-size: clamp(2.5rem, 5vw, 6rem);
+            line-height: 1.1;
+            margin-bottom: 2vw;
+        }
+
+        .subtitle {
+            font-family: var(--font-sans);
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--accent);
+            margin-bottom: 1.5vw;
+            display: block;
+        }
+
+        p {
+            font-size: 1.1rem;
+            color: var(--text-dim);
+            font-weight: 300;
+        }
+
+        /* SCROLL REVEAL ANIMATIONS */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: var(--transition-smooth);
+        }
+        
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* LAYOUT & SECTIONS */
+        section {
+            padding: 10vw 5vw;
+        }
+
+        /* HERO SECTION */
+        #hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero-badge {
+            border: 1px solid rgba(244, 235, 225, 0.2);
+            padding: 10px 24px;
+            border-radius: var(--radius-button);
+            font-size: 0.9rem;
+            margin-bottom: 4vh;
+            display: inline-block;
+        }
+
+        /* MEET RUSHXR (SIDE BY SIDE) */
+        .split-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5vw;
+            align-items: flex-start;
+        }
+
+        .split-left {
+            position: sticky;
+            top: 20vh;
+        }
+
+        .value-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 4vw;
+        }
+
+        .value-item h3 {
+            font-family: var(--font-sans);
+            font-size: 1.5rem;
+            color: var(--text-light);
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+
+        /* THE AUDIT / PILLARS */
+        .pillar-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2vw;
+            margin-top: 5vw;
+        }
+
+        .pillar-card {
+            background: var(--bg-card);
+            padding: 4vw 3vw;
+            border-radius: var(--radius-large);
+            transition: var(--transition-smooth);
+        }
+
+        .pillar-card:hover {
+            transform: translateY(-10px);
+            background: #1a1a1a;
+        }
+
+        .pillar-card h3 {
+            font-size: 2rem;
+            margin-bottom: 1vw;
+            color: var(--text-light);
+        }
+
+        /* CONCEPTS (TRIONN STYLE MEDIA BLOCKS) */
+        .concept-wrapper {
+            margin-top: 10vw;
+        }
+
+        .concept-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5vw;
+            margin-bottom: 15vw;
+            align-items: center;
+        }
+
+        /* Alternate left/right alignment */
+        .concept-row:nth-child(even) .concept-media {
+            order: 2;
+        }
+        .concept-row:nth-child(even) .concept-content {
+            order: 1;
+        }
+
+        .concept-media {
+            width: 100%;
+            aspect-ratio: 16/9;
+            background: linear-gradient(145deg, #1A1A1A 0%, #0A0A0A 100%);
+            border-radius: var(--radius-large);
+            border: 1px solid rgba(255,255,255,0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .media-label {
+            color: var(--text-dim);
+            font-size: 0.9rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        .concept-content h2 {
+            font-size: 4rem;
+            margin-bottom: 2vw;
+            line-height: 1.1;
+        }
+
+        .detail-group {
+            margin-bottom: 2vw;
+            border-left: 1px solid rgba(255,255,255,0.1);
+            padding-left: 2vw;
+        }
+
+        .detail-group h4 {
+            font-family: var(--font-sans);
+            font-size: 1rem;
+            color: var(--text-light);
+            margin-bottom: 8px;
+            letter-spacing: 0.05em;
+        }
+
+        /* CTA BUTTON */
+        .btn-primary {
+            display: inline-block;
+            background: var(--text-light);
+            color: var(--bg-dark);
+            padding: 20px 45px;
+            border-radius: var(--radius-button);
+            font-size: 1.1rem;
+            font-weight: 500;
+            text-decoration: none;
+            margin-top: 3vw;
+            transition: var(--transition-smooth);
+        }
+
+        .btn-primary:hover {
+            background: var(--accent);
+            color: var(--text-light);
+            transform: scale(1.05);
+        }
+
+        /* IMAGE HOVER ZOOM */
+        .concept-media img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.8;
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            transform: scale(1);
+        }
+        
+        .concept-media:hover img {
+            opacity: 1;
+            transform: scale(1.05);
+        }
+
+        /* CONTACT MODAL */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(10px);
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition-smooth);
+        }
+        
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .modal-content {
+            background: var(--bg-card);
+            padding: 4vw;
+            border-radius: var(--radius-large);
+            border: 1px solid rgba(255,255,255,0.05);
+            text-align: center;
+            position: relative;
+            transform: translateY(40px);
+            transition: var(--transition-smooth);
+            max-width: 90%;
+            width: 500px;
+        }
+        
+        .modal-overlay.active .modal-content {
+            transform: translateY(0);
+        }
+        
+        .modal-content h3 {
+            font-size: 2rem;
+            margin-bottom: 2vw;
+            color: var(--text-light);
+        }
+        
+        .modal-options {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .modal-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: var(--text-light);
+            padding: 15px 30px;
+            border-radius: var(--radius-button);
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: var(--transition-smooth);
+        }
+        
+        .modal-btn:hover {
+            background: var(--text-light);
+            color: var(--bg-dark);
+            transform: scale(1.02);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            color: var(--text-dim);
+            font-size: 2.5rem;
+            line-height: 1;
+            cursor: none; /* For custom cursor */
+            transition: 0.3s;
+        }
+
+        .modal-close:hover {
+            color: var(--accent);
+            transform: scale(1.1);
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 900px) {
+            .split-section, .pillar-grid, .concept-row {
+                grid-template-columns: 1fr;
+            }
+            .split-left {
+                position: relative;
+                top: 0;
+            }
+            .concept-row:nth-child(even) .concept-media { order: 1; }
+            .concept-row:nth-child(even) .concept-content { order: 2; }
+            section { padding: 15vw 5vw; }
+            .concept-content h2 { font-size: 2.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- CUSTOM CURSOR -->
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
+
+    <!-- HERO -->
+    <section id="hero">
+        <div class="hero-badge fade-up">A PR EXPERIENCE PROPOSAL FOR UNDERNEAT</div>
+        <h1 class="heading-huge fade-up" style="transition-delay: 0.1s;">The Hidden <br><i style="color: var(--accent);">Foundation.</i></h1>
+        <p class="fade-up" style="margin-top: 3vw; font-size: 1.2rem; transition-delay: 0.2s;">Creative Ideation & Structural Design by RushXR.</p>
+    </section>
+
+    <!-- MEET RUSHXR -->
+    <section class="split-section">
+        <div class="split-left fade-up">
+            <span class="subtitle">Who We Are</span>
+            <h2 class="heading-large">Nice to meet you.<br>We are RushXR.</h2>
+            <p style="max-width: 80%;">We are a future-first collective of designers and creators. We don't just put logos on standard vendor items. We look at a PR drop as a way to engineer a physical, memorable moment for your audience.</p>
+        </div>
+        <div class="split-right">
+            <ul class="value-list">
+                <li class="value-item fade-up">
+                    <h3>Brand-First Focus</h3>
+                    <p>We don't rely on gimmicks. We dig into your core values and design clever, premium solutions that actually tell your story.</p>
+                </li>
+                <li class="value-item fade-up">
+                    <h3>Future-First Execution</h3>
+                    <p>We approach physical design with a modern, technical mindset. We care about the structural mechanics, the minimal aesthetics, and how the user physically interacts with the piece.</p>
+                </li>
+                <li class="value-item fade-up">
+                    <h3>Driven by Passion</h3>
+                    <p>We put our heart into the brands we genuinely respect. We believe in the Underneat mission, and we are highly motivated to get in the trenches with you to build something undeniable.</p>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- THE AUDIT -->
+    <section>
+        <div class="fade-up" style="max-width: 800px; margin: 0 auto; text-align: center;">
+            <span class="subtitle">Our Research</span>
+            <h2 class="heading-large">Building from the<br><i>Right Foundation.</i></h2>
+            <p>Before sketching a single concept, we audited the Underneat ecosystem. We looked closely at Kusha Kapila's authentic, unfiltered tone and analyzed your product catalog to find the exact friction points you are solving for Indian women. We distilled this research into the three core pillars that drive our design concepts:</p>
+        </div>
+        
+        <div class="pillar-grid">
+            <div class="pillar-card fade-up">
+                <h3 class="serif">01. Inclusivity</h3>
+                <p>Designing strictly for diverse Indian body types and skin tones.</p>
+            </div>
+            <div class="pillar-card fade-up" style="transition-delay: 0.1s;">
+                <h3 class="serif">02. Comfort</h3>
+                <p>Empowering the wearer with breathable, unrestrictive Sensil® technology. The "second skin."</p>
+            </div>
+            <div class="pillar-card fade-up" style="transition-delay: 0.2s;">
+                <h3 class="serif">03. The Invisible</h3>
+                <p>"What Are You Wearing Under?" Normalizing the invisible foundation that dictates how the outer layers feel.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONCEPTS GALLERY -->
+    <section class="concept-wrapper">
+        
+        <!-- CONCEPT 1 -->
+<div class="concept-row"><div class="concept-media fade-up interactive-hover">
+    <img src="ConceptA.png" alt="Peel-Away Poster Box">
+</div>
+
+            <div class="concept-content fade-up">
+                <span class="subtitle">Concept 01</span>
+                <h2 class="serif">The "Peel-Away" Poster Box.</h2>
+                <p style="margin-bottom: 2vw; font-style: italic; color: var(--accent);">Theme: The Hidden Foundation ("What Are You Wearing Under?")</p>
+                
+                <div class="detail-group">
+                    <h4>The Products (The "Stealth Sculpt" Kit)</h4>
+                    <p>Strapless Bodysuit & Nipple Covers. Built as the "secret weapon" foundation for tricky event outfits and cut-out dresses.</p>
+                </div>
+                <div class="detail-group">
+                    <h4>The Structural Concept & Why This Works</h4>
+                    <p>A heavily textured outer sleeve wraps a minimal, skin-toned rigid box. The creator pulls a built-in zipper perforation to physically "strip away" the chaotic outer layer. It physically represents the "What Are You Wearing Under?" hook. Outer clothes can be heavy and complicated, but your foundation (the inner box) is flawless, minimal, and secure.</p>
+                </div>
+                <div class="detail-group">
+                    <h4>The Keepsake</h4>
+                    <p>The torn outer sleeve unfolds into a heavy-stock typographic poster reading: "Unfold your foundation." Includes a dispenser of invisible fashion tape inscribed with: "The best layers are the ones they never see."</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- CONCEPT 2 -->
+        <div class="concept-row">
+          <div class="concept-media fade-up interactive-hover">
+    <img src="ConceptB.png" alt="Cloud-Pouch Cylinder">
+</div>
+            <div class="concept-content fade-up">
+                <span class="subtitle">Concept 02</span>
+                <h2 class="serif">The "Cloud-Pouch" Cylinder.</h2>
+                <p style="margin-bottom: 2vw; font-style: italic; color: var(--accent);">Theme: True Comfort & Weightlessness</p>
+                
+                <div class="detail-group">
+                    <h4>The Products (The "Cloud Base" Kit)</h4>
+                    <p>Jelly Bra & Shaping Briefs. A low-friction, ultimate-comfort daily kit that influencers can wear under a basic t-shirt and review immediately.</p>
+                </div>
+                <div class="detail-group">
+                    <h4>The Structural Concept & Why This Works</h4>
+                    <p>A frosted, semi-translucent vertical tube holding a highly textured, quilted Tyvek "pillow" pouch. Cardboard boxes feel rigid; Tyvek feels like literal air. This design tactilely proves your "second skin" and breathability claims before they even touch the garment.</p>
+                </div>
+                <div class="detail-group">
+                    <h4>The Keepsake & Clever Detail</h4>
+                    <p>The pouch includes a heavy-duty matte metal carabiner, instantly becoming a durable, water-resistant travel bag. Care instructions are printed directly onto a raw swatch of Sensil® fabric, so they can physically feel the 4-way stretch immediately.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- CONCEPT 3 -->
+        <div class="concept-row">
+            <div class="concept-media fade-up interactive-hover">
+    <img src="ConceptC.png" alt="The Contour Drawer">
+</div>            <div class="concept-content fade-up">
+                <span class="subtitle">Concept 03</span>
+                <h2 class="serif">The "Contour Drawer"</h2>
+                <p style="margin-bottom: 2vw; font-style: italic; color: var(--accent);">Theme: Radical Inclusivity & Diverse Forms</p>
+                
+                <div class="detail-group">
+                    <h4>The Products (The "Desi Contour" Kit)</h4>
+                    <p>Saree Shapewear & Tummy Tucker Shorts. Targeting the massive Indian festive and wedding wardrobe.</p>
+                </div>
+                <div class="detail-group">
+                    <h4>The Structural Concept & Why This Works</h4>
+                    <p>A matte-black drawer box. Inside, the garments are flawlessly rolled and separated by thick, premium acrylic dividers. Instead of cliché silhouettes, the dividers are cut into unique, biomorphic curves representing diverse body shapes. It turns "inclusivity" into a sophisticated piece of premium industrial design.</p>
+                </div>
+                <div class="detail-group">
+                    <h4>The Keepsake</h4>
+                    <p>These dividers lift out to become premium coffee table coasters. The back is subtly inscribed: "Every form is functional. Every shape is valid."</p>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- EXECUTION -->
+    <section class="split-section" style="border-top: 1px solid rgba(255,255,255,0.05); padding-top: 10vw;">
+        <div class="split-left fade-up">
+            <span class="subtitle">Execution</span>
+            <h2 class="heading-large">Flawless <br><i>Logistics.</i></h2>
+        </div>
+        <div class="split-right">
+            <p class="fade-up" style="font-size: 1.5rem; color: var(--text-light); margin-bottom: 4vw;">We know that a great design is only as good as its final delivery. RushXR is fully equipped to be your end-to-end partner for this launch.</p>
+            <ul class="value-list">
+                <li class="value-item fade-up">
+                    <h3>Vast Vendor Network</h3>
+                    <p>From bespoke structural production to specialized fabric printing, we handle all the sourcing.</p>
+                </li>
+                <li class="value-item fade-up">
+                    <h3>Proven Scale & Precision</h3>
+                    <p>We have successfully managed and executed large-scale, high-stakes government projects, bringing that same level of rigor and reliability to bespoke PR drops.</p>
+                </li>
+                <li class="value-item fade-up">
+                    <h3>Seamless Partnership</h3>
+                    <p>We manage the process from the first sketch to doorstep delivery, ensuring the final product matches the initial vision perfectly.</p>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section id="cta" style="text-align: center; padding-bottom: 15vw;">
+        <div class="fade-up">
+            <h2 class="heading-huge">Let's Build <br><i style="color: var(--accent);">Your Reality.</i></h2>
+            <p style="max-width: 600px; margin: 3vw auto; font-size: 1.2rem;">These three concepts are a brainstorm to show you how deeply we think about brand translation and structural design. Whatever your actual PR launch goals, target audience, or production budgets are, we are ready to pivot, adapt, and engineer the perfect solution alongside your team.</p>
+            <a href="#" class="btn-primary">Let's Hop On A Call</a>
+        </div>
+    </section>
+
+    <!-- CONTACT MODAL -->
+    <div id="contact-modal" class="modal-overlay">
+        <div class="modal-content">
+            <button class="modal-close">&times;</button>
+            <h3 class="serif">How would you like to connect?</h3>
+            <div class="modal-options">
+                <a href="mailto:arushindiaone@gmail.com" class="modal-btn">
+                    <span class="icon">✉</span> Send an Email
+                </a>
+                <a href="tel:+917033526129" class="modal-btn">
+                    <span class="icon">☏</span> +91 70335 26129
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // CUSTOM CURSOR LOGIC
+        const cursorDot = document.querySelector('.cursor-dot');
+        const cursorOutline = document.querySelector('.cursor-outline');
+        
+        window.addEventListener('mousemove', (e) => {
+            const posX = e.clientX;
+            const posY = e.clientY;
+            
+            cursorDot.style.left = `${posX}px`;
+            cursorDot.style.top = `${posY}px`;
+            
+            // Outline follows with slight delay
+            cursorOutline.animate({
+                left: `${posX}px`,
+                top: `${posY}px`
+            }, { duration: 500, fill: "forwards" });
+        });
+
+        // MODAL LOGIC
+        const ctaBtn = document.querySelector('#cta .btn-primary');
+        const modalOverlay = document.getElementById('contact-modal');
+        const modalClose = document.querySelector('.modal-close');
+
+        ctaBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            modalOverlay.classList.add('active');
+        });
+
+        modalClose.addEventListener('click', () => {
+            modalOverlay.classList.remove('active');
+        });
+
+        modalOverlay.addEventListener('click', (e) => {
+            if (e.target === modalOverlay) {
+                modalOverlay.classList.remove('active');
+            }
+        });
+
+        // HOVER STATE FOR INTERACTIVE MEDIA BLOCKS
+        const hoverItems = document.querySelectorAll('.interactive-hover, .btn-primary, .modal-btn, .modal-close');
+        hoverItems.forEach(item => {
+            item.addEventListener('mouseenter', () => {
+                cursorDot.style.transform = 'translate(-50%, -50%) scale(3)';
+                cursorDot.style.backgroundColor = 'transparent';
+                cursorDot.style.border = '1px solid var(--accent)';
+            });
+            item.addEventListener('mouseleave', () => {
+                cursorDot.style.transform = 'translate(-50%, -50%) scale(1)';
+                cursorDot.style.backgroundColor = 'var(--text-light)';
+                cursorDot.style.border = 'none';
+            });
+        });
+
+        // SCROLL REVEAL ANIMATIONS
+        const observerOptions = {
+            threshold: 0.15,
+            rootMargin: "0px 0px -50px 0px"
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target); // Run once
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-up').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
