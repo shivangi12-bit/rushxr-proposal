@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Introductory Call | RushXR</title>
+    <style>
+        /* TRIONN LUXURY AGENCY AESTHETIC */
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap');
+
+        :root {
+            --bg-dark: #0A0A0A;
+            --bg-card: #141414;
+            --text-light: #F4EBE1;
+            --text-dim: #A39E98;
+            --accent: #C96F4D;
+            
+            --font-serif: 'Playfair Display', serif;
+            --font-sans: 'Plus Jakarta Sans', sans-serif;
+            
+            --radius-large: 2vw;
+            --radius-button: 100px;
+            
+            --transition-smooth: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            cursor: none;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            overflow-x: hidden;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .cursor-dot {
+            width: 8px;
+            height: 8px;
+            background-color: var(--text-light);
+            border-radius: 50%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            transition: width 0.3s, height 0.3s, background-color 0.3s;
+        }
+        
+        .cursor-outline {
+            width: 40px;
+            height: 40px;
+            border: 1px solid rgba(244, 235, 225, 0.3);
+            border-radius: 50%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 9998;
+            transform: translate(-50%, -50%);
+            transition: 0.15s ease-out;
+        }
+
+        h1, h2, h3, .serif {
+            font-family: var(--font-serif);
+            font-weight: 400;
+        }
+
+        .heading-huge {
+            font-size: clamp(4rem, 10vw, 12rem);
+            line-height: 1;
+            letter-spacing: -0.02em;
+        }
+
+        .heading-large {
+            font-size: clamp(2.5rem, 5vw, 6rem);
+            line-height: 1.1;
+            margin-bottom: 2vw;
+        }
+
+        .subtitle {
+            font-family: var(--font-sans);
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--accent);
+            margin-bottom: 1.5vw;
+            display: block;
+        }
+
+        p {
+            font-size: 1.1rem;
+            color: var(--text-dim);
+            font-weight: 300;
+        }
+
+        .fade-up {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: var(--transition-smooth);
+        }
+        
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        section {
+            padding: 10vw 5vw;
+        }
+
+        #hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero-badge {
+            border: 1px solid rgba(244, 235, 225, 0.2);
+            padding: 10px 24px;
+            border-radius: var(--radius-button);
+            font-size: 0.9rem;
+            margin-bottom: 4vh;
+            display: inline-block;
+        }
+
+        .split-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5vw;
+            align-items: flex-start;
+        }
+
+        .split-left {
+            position: sticky;
+            top: 20vh;
+        }
+
+        .value-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 4vw;
+        }
+
+        .value-item h3 {
+            font-family: var(--font-sans);
+            font-size: 1.5rem;
+            color: var(--text-light);
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+
+        .pillar-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2vw;
+            margin-top: 5vw;
+        }
+
+        .pillar-card {
+            background: var(--bg-card);
+            padding: 4vw 3vw;
+            border-radius: var(--radius-large);
+            transition: var(--transition-smooth);
+        }
+
+        .pillar-card:hover {
+            transform: translateY(-10px);
+            background: #1a1a1a;
+        }
+
+        .pillar-card h3 {
+            font-size: 2rem;
+            margin-bottom: 1vw;
+            color: var(--text-light);
+        }
+
+        .concept-wrapper {
+            margin-top: 10vw;
+        }
+
+        .concept-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5vw;
+            margin-bottom: 15vw;
+            align-items: center;
+        }
+
+        .concept-row:nth-child(even) .concept-media {
+            order: 2;
+        }
+        .concept-row:nth-child(even) .concept-content {
+            order: 1;
+        }
+
+        .concept-media {
+            width: 100%;
+            aspect-ratio: 3/2;
+            background: linear-gradient(145deg, #1A1A1A 0%, #0A0A0A 100%);
+            border-radius: var(--radius-large);
+            border: 1px solid rgba(255,255,255,0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .media-label {
+            color: var(--text-dim);
+            font-size: 0.9rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        .concept-content h2 {
+            font-size: 4rem;
+            margin-bottom: 2vw;
+            line-height: 1.1;
+        }
+
+        .detail-group {
+            margin-bottom: 2vw;
+            border-left: 1px solid rgba(255,255,255,0.1);
+            padding-left: 2vw;
+        }
+
+        .detail-group h4 {
+            font-family: var(--font-sans);
+            font-size: 1rem;
+            color: var(--text-light);
+            margin-bottom: 8px;
+            letter-spacing: 0.05em;
+        }
+
+        .btn-primary {
+            display: inline-block;
+            background: var(--text-light);
+            color: var(--bg-dark);
+            padding: 20px 45px;
+            border-radius: var(--radius-button);
+            font-size: 1.1rem;
+            font-weight: 500;
+            text-decoration: none;
+            margin-top: 3vw;
+            transition: var(--transition-smooth);
+        }
+
+        .btn-primary:hover {
+            background: var(--accent);
+            color: var(--text-light);
+            transform: scale(1.05);
+        }
+
+        .concept-media img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.8;
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            transform: scale(1);
+        }
+        
+        .concept-media:hover img {
+            opacity: 1;
+            transform: scale(1.05);
+        }
+
+        @media (max-width: 900px) {
+            .split-section, .pillar-grid, .concept-row {
+                grid-template-columns: 1fr;
+            }
+            .split-left {
+                position: relative;
+                top: 0;
+            }
+            .concept-row:nth-child(even) .concept-media { order: 1; }
+            .concept-row:nth-child(even) .concept-content { order: 2; }
+            section { padding: 15vw 5vw; }
+            .concept-content h2 { font-size: 2.5rem; }
+            
+            .concept-media { 
+                aspect-ratio: 4/3; 
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- CUSTOM CURSOR -->
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
+
+    <a href="index.html" class="interactive-hover" style="position: fixed; top: 3vw; left: 3vw; color: var(--text-dim); text-decoration: none; font-family: var(--font-sans); font-size: 0.9rem; z-index: 100; letter-spacing: 0.1em; text-transform: uppercase;">&larr; Back to Proposal</a>
+
+    <!-- Slide 1: Introduction -->
+    <section id="slide-1" class="split-section" style="padding-top: 15vh; min-height: 100vh;">
+        <div class="split-left fade-up">
+            <span class="subtitle">Slide 1: Introduction</span>
+            <h2 class="heading-large">Introducing<br><i style="color: var(--accent);">RUSHXR.</i></h2>
+        </div>
+        <div class="split-right">
+            <ul class="value-list">
+                <li class="value-item fade-up">
+                    <h3>The Agency</h3>
+                    <p>A collective of creators building bespoke, immersive design solutions.</p>
+                </li>
+                <li class="value-item fade-up">
+                    <h3>The Capabilities</h3>
+                    <p>Bridging digital vision and physical execution. We combine in-house 3D/structural design with a vast network of specialized fabricators to build premium PR kits at scale.</p>
+                </li>
+                <li class="value-item fade-up">
+                    <h3>The Strategy</h3>
+                    <p>Fiercely brand-driven. Every decision is engineered to amplify your goals and protect your core brand essence.</p>
+                </li>
+                <li class="value-item fade-up">
+                    <h3>The Impact</h3>
+                    <p>Beyond standard aesthetics. We deliver highly tactile, immersive physical experiences that leave a permanent mark.</p>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Slide 2: Agenda -->
+    <section id="slide-2" style="border-top: 1px solid rgba(255,255,255,0.05); min-height: 100vh; display: flex; flex-direction: column; justify-content: center;">
+        <div class="fade-up" style="max-width: 800px; margin: 0 auto; text-align: center;">
+            <span class="subtitle">Slide 2: Agenda</span>
+            <h2 class="heading-large">Project Alignment &<br><i>Workflow.</i></h2>
+        </div>
+        
+        <div class="pillar-grid">
+            <div class="pillar-card fade-up">
+                <h3 class="serif">01. Creative Concepts</h3>
+                <p>Exploring the two physical PR kit directions.</p>
+            </div>
+            <div class="pillar-card fade-up" style="transition-delay: 0.1s;">
+                <h3 class="serif">02. Execution Pipeline</h3>
+                <p>Our step-by-step process from structural engineering to final handover.</p>
+            </div>
+            <div class="pillar-card fade-up" style="transition-delay: 0.2s;">
+                <h3 class="serif">03. Initial Discovery</h3>
+                <p>Core questions to define project scope, sizing, and logistics.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 3 & 4: Concepts -->
+    <section class="concept-wrapper" style="border-top: 1px solid rgba(255,255,255,0.05); padding-top: 10vw;">
+        
+        <!-- CONCEPT 1 (Slide 3) -->
+        <div id="slide-3" class="concept-row">
+            <div class="concept-media fade-up interactive-hover">
+                <img src="ConceptA.png" alt="Peel-Away Poster Box">
+            </div>
+            <div class="concept-content fade-up">
+                <span class="subtitle">Slide 3: Concept 01</span>
+                <h2 class="serif">The "Peel-Away" Poster Box.</h2>
+                
+                <div class="detail-group">
+                    <h4>The Theme</h4>
+                    <p>"The Hidden Foundation" – built specifically for the Stealth Sculpt Kit.</p>
+                </div>
+                <div class="detail-group">
+                    <h4>The Products</h4>
+                    <p>Strapless Bodysuit & Nipple Covers.</p>
+                </div>
+                <div class="detail-group">
+                    <h4>The Mechanic</h4>
+                    <p>A clothing-textured outer sleeve featuring a built-in zipper perforation.</p>
+                </div>
+                <div class="detail-group">
+                    <h4>The Reveal</h4>
+                    <p>The creator physically tears away the outer layer to reveal a flawless, minimal, skin-toned rigid box inside.</p>
+                </div>
+                <div class="detail-group">
+                    <h4>The Keepsake</h4>
+                    <p>The torn outer sleeve unfolds into a heavy-stock typographic poster ("Unfold your foundation"), paired with a custom invisible fashion tape dispenser.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- CONCEPT 2 (Slide 4) -->
+        <div id="slide-4" class="concept-row">
+            <div class="concept-media fade-up interactive-hover">
+                <img src="ConceptB.png" alt="Cloud-Pouch Cylinder">
+            </div>
+            <div class="concept-content fade-up">
+                <span class="subtitle">Slide 4: Concept 02</span>
+                <h2 class="serif">The "Cloud-Pouch" Cylinder.</h2>
+                
+                <div class="detail-group">
+                    <h4>The Theme</h4>
+                    <p>"Weightless & Seamless" – a highly tactile, contrasting unboxing experience.</p>
+                </div>
+                <div class="detail-group">
+                    <h4>The Products</h4>
+                    <p>Jelly Bra & Shaping Briefs (or similar foundation layers).</p>
+                </div>
+                <div class="detail-group">
+                    <h4>The Vessel</h4>
+                    <p>A heavy, premium frosted cylinder capped with cold, machined aluminum lids.</p>
+                </div>
+                <div class="detail-group">
+                    <h4>The Reveal</h4>
+                    <p>A striking sensory contrast as the creator pulls an ultra-soft, voluminous "cloud" pouch out of the industrial metal tube.</p>
+                </div>
+                <div class="detail-group">
+                    <h4>The Keepsake</h4>
+                    <p>A premium, reusable travel pouch designed for a high-end "second skin" feel.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 5: Execution Pipeline -->
+    <section id="slide-5" class="split-section" style="border-top: 1px solid rgba(255,255,255,0.05); padding-top: 10vw;">
+        <div class="split-left fade-up">
+            <span class="subtitle">Slide 5: The Execution Pipeline</span>
+            <h2 class="heading-large">From Blueprint to<br><i>Handover.</i></h2>
+        </div>
+        <div class="split-right">
+            <ul class="value-list">
+                <li class="value-item fade-up">
+                    <h3 style="color: var(--accent);">Phase 1: Pre-Production</h3>
+                    <p>• We calculate exact garment volumes to engineer the structural die-lines.</p>
+                    <p>• We build a "blank" physical mockup to test the tear mechanics (Concept 01) or the tube-fit (Concept 02).</p>
+                    <p>• We generate photorealistic 3D renders applying your exact brand artwork and typography.</p>
+                    <p style="margin-top: 10px; font-weight: 500; color: var(--text-light);"><strong>Client Action:</strong> A quick video call to approve the physical blank, followed by final sign-off on the 3D artwork.</p>
+                </li>
+                <li class="value-item fade-up">
+                    <h3 style="color: var(--accent);">Phase 2: Production</h3>
+                    <p>• <strong>Material Testing:</strong> We sample and test different structural fabrics to find the exact option that delivers a premium finish while strictly adhering to your budget.</p>
+                    <p>• <strong>The "Golden Sample":</strong> Once the material is locked in, we manufacture exactly one fully finished, perfectly printed physical prototype.</p>
+                    <p style="margin-top: 10px; font-weight: 500; color: var(--text-light);"><strong>Client Action:</strong> Physical sign-off. You hold the "Golden Sample" and give the green light.</p>
+                    <p>• <strong>Scale:</strong> We scale production to your exact requirement, handling the custom machining, fabric stitching, and die-cutting.</p>
+                </li>
+                <li class="value-item fade-up">
+                    <h3 style="color: var(--accent);">Phase 3: Post-Production</h3>
+                    <p>• We conduct strict Quality Control on all final assembled materials.</p>
+                    <p>• We securely freight the pristine, empty kits directly to your warehouse.</p>
+                    <p>• We supply a visual "Assembly Guide" ensuring your team seamlessly folds the garments and seals the kits perfectly before creator dispatch.</p>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Slide 6: Initial Discovery -->
+    <section id="slide-6" style="border-top: 1px solid rgba(255,255,255,0.05); padding-bottom: 15vw; min-height: 100vh; display: flex; flex-direction: column; justify-content: center;">
+        <div class="fade-up" style="max-width: 800px; margin: 0 auto; text-align: center;">
+            <span class="subtitle">Slide 6: Initial Discovery</span>
+            <h2 class="heading-large">Scope & <br><i>Logistics.</i></h2>
+            <p style="margin-bottom: 4vw; font-size: 1.2rem;">To ensure our engineering aligns with your physical products and overarching campaign goals, we need to define:</p>
+        </div>
+        
+        <div class="pillar-grid">
+            <div class="pillar-card fade-up">
+                <h3 class="serif">The Objective</h3>
+                <p>What is the primary goal of this PR launch? (e.g., driving viral unboxing moments, highlighting the technical foundation of the garments, or general brand awareness). This will dictate which of the two concepts we lock in.</p>
+            </div>
+            <div class="pillar-card fade-up" style="transition-delay: 0.1s;">
+                <h3 class="serif">The Cargo</h3>
+                <p>What specific garments are going into this kit? (We have curated recommendations for both concepts, but we need your final confirmation so we can engineer the exact dimensions).</p>
+            </div>
+            <div class="pillar-card fade-up" style="transition-delay: 0.2s;">
+                <h3 class="serif">The Scale</h3>
+                <p>While 100 units is our baseline starting point, the final production run will vary according to your requirements. How many total units are you aiming for, and what is the hard drop date?</p>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // CUSTOM CURSOR LOGIC
+        const cursorDot = document.querySelector('.cursor-dot');
+        const cursorOutline = document.querySelector('.cursor-outline');
+        
+        window.addEventListener('mousemove', (e) => {
+            const posX = e.clientX;
+            const posY = e.clientY;
+            
+            cursorDot.style.left = `${posX}px`;
+            cursorDot.style.top = `${posY}px`;
+            
+            cursorOutline.animate({
+                left: `${posX}px`,
+                top: `${posY}px`
+            }, { duration: 500, fill: "forwards" });
+        });
+
+        // HOVER STATE FOR INTERACTIVE BLOCKS
+        const hoverItems = document.querySelectorAll('.interactive-hover, .btn-primary, .modal-btn, .modal-close');
+        hoverItems.forEach(item => {
+            item.addEventListener('mouseenter', () => {
+                cursorDot.style.transform = 'translate(-50%, -50%) scale(3)';
+                cursorDot.style.backgroundColor = 'transparent';
+                cursorDot.style.border = '1px solid var(--accent)';
+            });
+            item.addEventListener('mouseleave', () => {
+                cursorDot.style.transform = 'translate(-50%, -50%) scale(1)';
+                cursorDot.style.backgroundColor = 'var(--text-light)';
+                cursorDot.style.border = 'none';
+            });
+        });
+
+        // SCROLL REVEAL ANIMATIONS
+        const observerOptions = {
+            threshold: 0.15,
+            rootMargin: "0px 0px -50px 0px"
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-up').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
