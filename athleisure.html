@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Athleisure PR Concepts | RushXR</title>
+    <style>
+        /* TRIONN LUXURY AGENCY AESTHETIC */
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap');
+
+        :root {
+            --bg-dark: #0A0A0A;
+            --bg-card: #141414;
+            --text-light: #F4EBE1;
+            --text-dim: #A39E98;
+            --accent: #C96F4D;
+            
+            --font-serif: 'Playfair Display', serif;
+            --font-sans: 'Plus Jakarta Sans', sans-serif;
+            
+            --radius-large: 2vw;
+            --radius-button: 100px;
+            
+            --transition-smooth: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            cursor: none;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            overflow-x: hidden;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .cursor-dot {
+            width: 8px;
+            height: 8px;
+            background-color: var(--text-light);
+            border-radius: 50%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            transition: width 0.3s, height 0.3s, background-color 0.3s;
+        }
+        
+        .cursor-outline {
+            width: 40px;
+            height: 40px;
+            border: 1px solid rgba(244, 235, 225, 0.3);
+            border-radius: 50%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 9998;
+            transform: translate(-50%, -50%);
+            transition: 0.15s ease-out;
+        }
+
+        h1, h2, h3, .serif {
+            font-family: var(--font-serif);
+            font-weight: 400;
+        }
+
+        .heading-huge {
+            font-size: clamp(4rem, 10vw, 12rem);
+            line-height: 1;
+            letter-spacing: -0.02em;
+        }
+
+        .heading-large {
+            font-size: clamp(2.5rem, 5vw, 6rem);
+            line-height: 1.1;
+            margin-bottom: 2vw;
+        }
+
+        .subtitle {
+            font-family: var(--font-sans);
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--accent);
+            margin-bottom: 1.5vw;
+            display: block;
+        }
+
+        p {
+            font-size: 1.1rem;
+            color: var(--text-dim);
+            font-weight: 300;
+        }
+
+        .fade-up {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: var(--transition-smooth);
+        }
+        
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        section {
+            padding: 10vw 5vw;
+        }
+
+        .concept-wrapper {
+            margin-top: 5vw;
+        }
+
+        .concept-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5vw;
+            margin-bottom: 15vw;
+            align-items: center;
+        }
+
+        .concept-row:nth-child(even) .concept-media {
+            order: 2;
+        }
+        .concept-row:nth-child(even) .concept-content {
+            order: 1;
+        }
+
+        .concept-media {
+            width: 100%;
+            aspect-ratio: 3/2;
+            background: linear-gradient(145deg, #1A1A1A 0%, #0A0A0A 100%);
+            border-radius: var(--radius-large);
+            border: 1px solid rgba(255,255,255,0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .concept-content h2 {
+            font-size: 3.5rem;
+            margin-bottom: 2vw;
+            line-height: 1.1;
+        }
+
+        .detail-group {
+            margin-bottom: 2vw;
+            border-left: 1px solid rgba(255,255,255,0.1);
+            padding-left: 2vw;
+        }
+
+        .detail-group h4 {
+            font-family: var(--font-sans);
+            font-size: 1rem;
+            color: var(--text-light);
+            margin-bottom: 8px;
+            letter-spacing: 0.05em;
+        }
+
+        .concept-media img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.8;
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            transform: scale(1);
+        }
+        
+        .concept-media:hover img {
+            opacity: 1;
+            transform: scale(1.05);
+        }
+
+        @media (max-width: 900px) {
+            .concept-row {
+                grid-template-columns: 1fr;
+            }
+            .concept-row:nth-child(even) .concept-media { order: 1; }
+            .concept-row:nth-child(even) .concept-content { order: 2; }
+            section { padding: 15vw 5vw; }
+            .concept-content h2 { font-size: 2.5rem; }
+            
+            .concept-media { 
+                aspect-ratio: 4/3; 
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- CUSTOM CURSOR -->
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
+
+    <a href="index.html" class="interactive-hover" style="position: fixed; top: 3vw; left: 3vw; color: var(--text-dim); text-decoration: none; font-family: var(--font-sans); font-size: 0.9rem; z-index: 100; letter-spacing: 0.1em; text-transform: uppercase;">&larr; Back to Proposal</a>
+
+    <!-- Title Section -->
+    <section style="padding-top: 15vh; padding-bottom: 5vh; text-align: center;">
+        <div class="fade-up">
+            <span class="subtitle">Presentation Copy</span>
+            <h1 class="heading-large">Underneat Athleisure <br><i style="color: var(--accent);">PR Package Concepts.</i></h1>
+        </div>
+    </section>
+
+    <!-- Concepts -->
+    <section class="concept-wrapper">
+        
+        <!-- Slide 1: Concept 01 -->
+        <div class="concept-row">
+            <div class="concept-media fade-up interactive-hover">
+                <img src="slide1.jpeg" alt="The Miniature Locker">
+            </div>
+            <div class="concept-content fade-up">
+                <span class="subtitle">Slide 1: Concept 01</span>
+                <h2 class="serif">The Miniature Locker</h2>
+                
+                <div class="detail-group">
+                    <h4>The Design</h4>
+                    <p>A high-end, industrial-style mini gym locker secured by a campaign-dated padlock. It opens to reveal the apparel on miniature hangers alongside curated gym accessories.</p>
+                </div>
+                <div class="detail-group">
+                    <h4>Actual Timeline (4–8 Weeks)</h4>
+                    <p>Full custom metal fabrication for a flawless, bespoke build.</p>
+                </div>
+                <div class="detail-group">
+                    <h4>The "Hack" Timeline (2–3 Weeks)</h4>
+                    <p>A "modular and rapid-sourcing" approach.</p>
+                </div>
+                <div class="detail-group">
+                    <h4 style="color: var(--accent);">What We Let Go Of</h4>
+                    <p>We bypass custom metal fabrication entirely. Instead of carving custom molds, we repurpose pre-existing items (like metal bento boxes) and finish them with rapid vinyl wraps.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 2: Concept 02 -->
+        <div class="concept-row">
+            <div class="concept-media fade-up interactive-hover">
+                <img src="slide2.jpeg" alt="The Articulated Orb">
+            </div>
+            <div class="concept-content fade-up">
+                <span class="subtitle">Slide 2: Concept 02</span>
+                <h2 class="serif">The Articulated Orb</h2>
+                
+                <div class="detail-group">
+                    <h4>The Design</h4>
+                    <p>A futuristic, matte-black streetwear collectible that kinetically "explodes" open via a push-button to unveil a realistic collectible doll alongside vacuum-sealed performance gear.</p>
+                </div>
+                <div class="detail-group">
+                    <h4>Actual Timeline (3–4 Months)</h4>
+                    <p>Requires custom steel molds and intricate steps for vinyl toys, including 3D sculpting, wax casting, and hand-painting.</p>
+                </div>
+                <div class="detail-group">
+                    <h4>The "Hack" Timeline (3–4 Weeks)</h4>
+                    <p>High-end rapid fabrication.</p>
+                </div>
+                <div class="detail-group">
+                    <h4 style="color: var(--accent);">What We Let Go Of</h4>
+                    <p>Traditional manufacturing and custom vinyl/ABS figures. We swap to SLA resin for the doll, MJF nylon 3D printing for the shell, and laser-cut Delrin for the kinetic mechanism. Paint finishes will be monochromatic to skip tedious hand-painting.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3: Concept 03 -->
+        <div class="concept-row">
+            <div class="concept-media fade-up interactive-hover">
+                <img src="slide3.jpeg" alt="The Foam Roller Vault">
+            </div>
+            <div class="concept-content fade-up">
+                <span class="subtitle">Slide 3: Concept 03</span>
+                <h2 class="serif">The Foam Roller Vault</h2>
+                
+                <div class="detail-group">
+                    <h4>The Design</h4>
+                    <p>A fully functional, tactical foam roller featuring a hidden internal tube that slides out to present tightly rolled, vacuum-sealed apparel drops.</p>
+                </div>
+                <div class="detail-group">
+                    <h4>Actual Timeline (2–3 Months)</h4>
+                    <p>Standard manufacturing involving custom steel molds to perfect the polymer shell.</p>
+                </div>
+                <div class="detail-group">
+                    <h4>The "Hack" Timeline (2–3 Weeks)</h4>
+                    <p>Custom rapid production.</p>
+                </div>
+                <div class="detail-group">
+                    <h4 style="color: var(--accent);">What We Let Go Of</h4>
+                    <p>Traditional custom steel molds. We will rely entirely on rapid production materials, such as machined copper and matte black MJF nylon/polymer, to construct the internal sliding sleeve mechanism.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4: Concept 04 -->
+        <div class="concept-row">
+            <div class="concept-media fade-up interactive-hover">
+                <img src="slide4.jpeg" alt="The Weight Plate Vault">
+            </div>
+            <div class="concept-content fade-up">
+                <span class="subtitle">Slide 4: Concept 04</span>
+                <h2 class="serif">The Weight Plate Vault</h2>
+                
+                <div class="detail-group">
+                    <h4>The Design</h4>
+                    <p>A stack of interlocking Olympic bumper plates that unstack or rotate on a central copper axis to reveal vacuum-sealed clothing hidden in recessed internal cavities.</p>
+                </div>
+                <div class="detail-group">
+                    <h4>Actual Timeline (2–3 Months)</h4>
+                    <p>Traditional heavy metal casting to achieve authentic weight and finish.</p>
+                </div>
+                <div class="detail-group">
+                    <h4>The "Hack" Timeline (2–3 Weeks)</h4>
+                    <p>Custom rapid production.</p>
+                </div>
+                <div class="detail-group">
+                    <h4 style="color: var(--accent);">What We Let Go Of</h4>
+                    <p>Traditional heavy casting methods. We must rely immediately on rapid production polymers and machined metals to create the recessed internal cavities and the rotating central mechanical axis.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // CUSTOM CURSOR LOGIC
+        const cursorDot = document.querySelector('.cursor-dot');
+        const cursorOutline = document.querySelector('.cursor-outline');
+        
+        window.addEventListener('mousemove', (e) => {
+            const posX = e.clientX;
+            const posY = e.clientY;
+            
+            cursorDot.style.left = `${posX}px`;
+            cursorDot.style.top = `${posY}px`;
+            
+            cursorOutline.animate({
+                left: `${posX}px`,
+                top: `${posY}px`
+            }, { duration: 500, fill: "forwards" });
+        });
+
+        // HOVER STATE FOR INTERACTIVE BLOCKS
+        const hoverItems = document.querySelectorAll('.interactive-hover, .btn-primary, .modal-btn, .modal-close');
+        hoverItems.forEach(item => {
+            item.addEventListener('mouseenter', () => {
+                cursorDot.style.transform = 'translate(-50%, -50%) scale(3)';
+                cursorDot.style.backgroundColor = 'transparent';
+                cursorDot.style.border = '1px solid var(--accent)';
+            });
+            item.addEventListener('mouseleave', () => {
+                cursorDot.style.transform = 'translate(-50%, -50%) scale(1)';
+                cursorDot.style.backgroundColor = 'var(--text-light)';
+                cursorDot.style.border = 'none';
+            });
+        });
+
+        // SCROLL REVEAL ANIMATIONS
+        const observerOptions = {
+            threshold: 0.15,
+            rootMargin: "0px 0px -50px 0px"
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-up').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
