@@ -172,14 +172,61 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            opacity: 0.8;
             transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
             transform: scale(1);
         }
         
-        .concept-media:hover img {
+        .concept-media:not(.slider-container) img {
+            opacity: 0.8;
+        }
+
+        .concept-media:not(.slider-container):hover img {
             opacity: 1;
             transform: scale(1.05);
+        }
+
+        /* Slider specific styles */
+        .slider-container img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+        }
+        
+        .slider-container img.active {
+            opacity: 0.8;
+            z-index: 2;
+        }
+
+        .slider-container:hover img.active {
+            opacity: 1;
+            transform: scale(1.05);
+        }
+
+        .slider-btn {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(10, 10, 10, 0.5);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: var(--text-light);
+            border-radius: 50%;
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            z-index: 10;
+            cursor: none;
+            transition: var(--transition-smooth);
+        }
+
+        .slider-btn:hover {
+            background: var(--text-light);
+            color: var(--bg-dark);
+            transform: scale(1.1);
         }
 
         @media (max-width: 900px) {
@@ -246,8 +293,10 @@
 
         <!-- Slide 2: Concept 02 -->
         <div class="concept-row">
-            <div class="concept-media fade-up interactive-hover">
-                <img src="slide2.jpeg" alt="The Articulated Orb">
+            <div class="concept-media fade-up interactive-hover slider-container" id="slide2-slider">
+                <img src="slide2.jpeg" class="slider-img active" alt="The Articulated Orb - View 1">
+                <img src="slide2.1.jpeg" class="slider-img" alt="The Articulated Orb - View 2">
+                <button class="slider-btn interactive-hover" onclick="toggleSlide2()">&#8594;</button>
             </div>
             <div class="concept-content fade-up">
                 <span class="subtitle">Slide 2: Concept 02</span>
@@ -380,6 +429,12 @@
         document.querySelectorAll('.fade-up').forEach(el => {
             observer.observe(el);
         });
+
+        // SLIDER LOGIC
+        function toggleSlide2() {
+            const sliderImages = document.querySelectorAll('#slide2-slider .slider-img');
+            sliderImages.forEach(img => img.classList.toggle('active'));
+        }
     </script>
 </body>
 </html>
